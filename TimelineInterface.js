@@ -1,4 +1,3 @@
-
 function User(uName, uID)
 {
     this.name = uName;
@@ -10,7 +9,8 @@ function User(uName, uID)
     this.addNovel = function(nName, nID)
     {
         var newNovel = new Novel(nName, nID);
-        this.novels.push(newNovel);
+        // this.novels.push(newNovel);
+        this.novels[nID] = newNovel;
         // console.log("Novel Added!");
     }
 
@@ -36,7 +36,8 @@ function Novel(nName, nID)
     this.addScene = function(sName, sID)
     {
         var newScene = new Scene(sName, sID);
-        this.scenes.push(newScene);
+        // this.scenes.push(newScene);
+        this.scenes[sID] = newScene;
     }
 
     this.addUI = function()
@@ -61,7 +62,8 @@ function Scene(sName, sID)
     this.addNote = function(nName, nID)
     {
         var newNote = new Note(nName, nID);
-        this.notes.push(newNote);
+        // this.notes.push(newNote);
+        this.notes[nID] = newNote;
     } 
 
     this.addUI = function()

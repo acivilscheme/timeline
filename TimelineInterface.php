@@ -135,36 +135,154 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script src="TimelineInterface.js"></script>
-<script type="text/javascript">
-    $(document).ready(function(){
-        var noteAmt = 2;
-        var userAmt = 1;
-        var novelAmt = 1;
-        var sceneAmt = 0;
+<script>
+$(document).ready(function(){
+    var allUsers = [];
 
-        $("#id_addNote").click(function(){
-            noteAmt += 1;
-            $("#id_notesArea").append("<div class='c_notes mx-auto'>\
-                                <label for='id_notesForm" + noteAmt + "'>Note " + noteAmt + "</label>\
-                                <textarea class='form-control' id='id_notesForm"+ noteAmt + "'></textarea>\
-                            </div>");
-        });
+    //Creating objects with javascript
+    // var uKaitlin = new User("Kaitlin", 0);
+    // uKaitlin.addNovel("My Bio", 0);
+    // uKaitlin.novels[0].addScene("Beginning", 0);
+    // uKaitlin.novels[0].addScene("Middle", 1);
+    // uKaitlin.novels[0].addScene("End", 2);
+    // uKaitlin.addNovel("Tear", 1);
+    // uKaitlin.novels[1].addScene("Drop", 0);
+    // uKaitlin.addNovel("Yo", 2);
+    // uKaitlin.novels[2].addScene("Ay", 0);
+    // uKaitlin.novels[2].addScene("Hay", 1);
+    // uKaitlin.novels[2].addScene("Microphone", 2);
+    // allUsers.push(uKaitlin);
+    
+    // var uTom = new User("Tom", 1);
+    // uTom.addNovel("Tom's World", 0);
+    // uTom.novels[0].addScene("World One", 0);
+    // uTom.novels[0].addScene("World Two", 1);
+    // uTom.novels[0].scenes[0].addNote("Bob", 0);
+    // allUsers.push(uTom);
 
-        $("#id_userFormBtn").click(function(){
-            userAmt += 1;
-            $("#id_userForm").append("<option>User" + userAmt + "</option>");
-        });
+    //When change user selection, add Novels
+    $("#id_userForm").on("change", function(){
+        var selectedUser = $(this).find("option:selected");
+        // var selectedUsername = $(this).find("option:selected").val();
+        var userID = selectedUser.attr("data-ID");
+        // console.log("Item ID: " + itemID);
 
-        $("#id_novelFormBtn").click(function(){
-            novelAmt += 1;
-            $("#id_novelForm").append("<option>Novel" + novelAmt + "</option>");
-        });
+        allUsers[userID].removeNovelsUI();
 
-        $("#id_sceneFormBtn").click(function(){
-            sceneAmt += 1;
-            $("#id_sceneForm").append("<option>Scene " + sceneAmt + "</option>");
-        });
+        for(i in allUsers[userID].novels)
+        {
+            allUsers[userID].novels[i].addUI();
+        }
     });
+
+    //When change novel selection, add Scenes
+    $("#id_novelForm").on("change", function(){
+        var selectedNovel = $(this).find("option:selected");
+        var novelID = selectedNovel.attr("data-ID");
+        var userID = $("#id_userForm").find("option:selected").attr("data-ID");
+
+        // console.log("Item ID: " + itemID);
+
+        allUsers[userID].novels[novelID].removeScenesUI();
+
+        for(i in allUsers[userID].novels[novelID].scenes)
+        {
+            allUsers[userID].novels[novelID].scenes[i].addUI();
+        }
+    });
+
+    //When change scene selection, add Notes
+    $("#id_sceneForm").on("change", function(){
+        var selectedScene = $(this).find("option:selected");
+        var sceneID = selectedScene.attr("data-ID");
+        var novelID = $("#id_novelForm").find("option:selected").attr("data-ID");
+        var userID = $("#id_userForm").find("option:selected").attr("data-ID");
+
+        allUsers[userID].novels[novelID].scenes[sceneID].removeNotesUI();
+
+        for(i in allUsers[userID].novels[novelID].scenes[sceneID].notes)
+        {
+            allUsers[userID].novels[novelID].scenes[sceneID].notes[i].addUI();
+        }
+    });
+
+    <?php
+        //Creating objects from database data
+        $servername = "localhost";
+        $username = "charneic_admin";
+        $password = "mahdata@siteground";
+        $dbName = "charneic_timeline";
+        // $servername = "localhost";
+        // $username = "root";
+        // $password = "";
+        // $dbName = "charneic_timeline";
+
+        $conn = new mysqli($servername, $username, $password, $dbName);
+
+        if (!$conn)
+        {
+            die("Connection to Database $dbName failed: " . mysqli_connect_error() . "<br />");
+        }
+
+        $usersInDatabase = mysqli_query($conn, "SELECT * FROM Users");
+        if(!mysqli_num_rows($usersInDatabase) == 0)
+        {
+            while($row = mysqli_fetch_array($usersInDatabase))
+            {
+                echo "
+                    var newUser = new User('".$row['Name']."', '".$row['UserID']."');
+                    allUsers['".$row['UserID']."'] = newUser;
+                ";
+            }
+        }
+
+        $novelsInDatabase = mysqli_query($conn, "SELECT * FROM Novels");
+        if(!mysqli_num_rows($novelsInDatabase) == 0)
+        {
+            while($row = mysqli_fetch_array($novelsInDatabase))
+            {
+                echo "
+                    allUsers['".$row['UserID']."'].addNovel('".$row['NovelName']."', '".$row['NovelID']."');
+            ";
+            }
+        }
+
+        $scenesInDatabase = mysqli_query($conn, "SELECT * FROM Scenes");
+        if(!mysqli_num_rows($scenesInDatabase) == 0)
+        {
+            while($row = mysqli_fetch_array($scenesInDatabase))
+            {
+                $result = mysqli_query($conn, "SELECT UserID FROM Novels WHERE NovelID='" . $row["NovelID"] . "' LIMIT 1");
+                $uID = mysqli_fetch_array($result);
+                $userID = $uID["UserID"];
+                // console_log("UserID: ". $userID . "");
+            
+                echo "
+                    allUsers['".$userID."'].novels['".$row['NovelID']."'].addScene('".$row['SceneName']."', '".$row['SceneID']."');
+                ";
+            }
+        }
+
+        $notesInDatabase = mysqli_query($conn, "SELECT * FROM Notes");
+        if(!mysqli_num_rows($notesInDatabase) == 0)
+        {
+            while($row = mysqli_fetch_array($notesInDatabase))
+            {
+                $novelResult = mysqli_query($conn, "SELECT NovelID FROM Scenes WHERE SceneID='" . $row["SceneID"] . "' LIMIT 1");
+                $nID = mysqli_fetch_array($novelResult);
+                $novelID = $nID["NovelID"];
+
+                $userResult = mysqli_query($conn, "SELECT UserID FROM Novels WHERE NovelID='".$novelID."' LIMIT 1");
+                $uID = mysqli_fetch_array($userResult);
+                $userID = $uID["UserID"];
+        
+                echo "
+                    allUsers['".$userID."'].novels['".$novelID."'].scenes['".$row['SceneID']."'].addNote('".$row['NoteText']."', '".$row['SceneID']."');
+                ";
+            }
+        }
+    ?>
+});
 </script>
 </body>
 </html>
