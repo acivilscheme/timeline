@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Timeline</title>
+
+    <!-- [Bootstrap] Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- [Bootstrap] needs to be before other styles -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+    <!-- My stylesheet-->
+    <link rel="stylesheet" href="timelineStyle.css" type="text/css" />
+</head>
+<body>
+    <!-- Navigation bar -->
+    <header>
+        <div class="container">
+        <nav class="navbar navbar-expand-xl navbar-dark bg-dark fixed-top">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#id_navbarCollapse" aria-controls="id_navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand col-2" href="#">Timeline</a>
+            <div id="id_navbarCollapse" class="collapse navbar-collapse">
+                <div class="col-1"></div>
+                <span class="navbar-text col-7 text-center">
+                    <input id="id_timelineName" class="form-control display-6 text-center" type="text" autocomplete="off">
+                </span>
+                <div class="col-3">
+                    <div class="container">
+                        <div id="id_userName" class="row"></div>
+                        <div class="row">
+                            <form id="id_novelName" class="form-inline">
+                                <select id="id_novelSelect" class="custom-select form-control-sm">
+                                    <option selected>Novels...</option>
+                                </select>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-1 text-right pt-2">
+                    <button id="id_logout" class="btn" disabled>Logout</button>
+                </div>
+            </div>
+        </nav>
+    </div>
+    </header>
+
+    <!-- Form popup to add Characters -->
+    <div id="id_modalForm" class="modal fade">
+        <div class="modal-dialog" role="dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Filled in with scripting -->
+                </div>
+                <div class="modal-footer">
+                    <!-- Filled in with scripting -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="id_timelineWrap" class="container">
+        <div id="id_addTimeline" class="row justify-content-center" >
+            <div class="col-md-auto">
+                <h4 class="display-4">
+                    <a id="id_addTimelineBtn" data-toggle="modal" data-target="#id_modalForm">
+                    <i class="fas fa-plus-circle"></i></a>
+                    Add Timeline
+                </h4> 
+            </div>
+        </div>
+        <div id="id_timelineControls" class="row mb-2 justify-content-start">
+            <button type="button" class="btn btn-sm mx-2" id="id_hideYears">Hide Years</button>
+            <button type="button" class="btn btn-sm mx-2" id="id_hideAllEvents">Hide All Events</button>
+            <select class="mx-2" id="id_characters">
+                <option selected>All Characters...</option>
+            </select>
+            <button type="button" class="btn btn-sm mx-2 ml-auto" id="id_reorderYears">Reorder Years</button>
+        </div>
+        <div id="id_yearsWrap" class="row">
+            <!-- Filled in with scripting -->
+        </div>
+        <div id="id_addYearWrap" class="row justify-content-left ml-2 mt-4">
+            <div class="col-md-auto">
+                <h4 class="display-5">
+                    <a id="id_addYearBtn" data-toggle="modal" data-target="#id_modalForm">
+                    <i class="fas fa-plus-circle"></i></a>
+                    Add Year
+                </h4> 
+            </div>
+        </div>
+    </div>
+<!-- [Bootstrap] javascript plugins, jquery and popper.js for bootstrap -->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="timeline.js"></script>
+</body>
+</html>

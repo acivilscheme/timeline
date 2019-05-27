@@ -1,0 +1,166 @@
+header{
+    border-bottom: 2px solid gray;
+}
+header h3, header h4, #id_header, #id_timelineName, #id_userName, #id_novelName{
+    display: inline-block;
+}
+.btn{
+    background-color: #bdbdbd;
+    border-radius: 0px;
+}
+.c_yearName{
+    /* class for date button */
+    min-width: 100px;
+}
+a.c_yearName{
+    color: #212529;
+}
+.c_hideEvents{
+    /* class for button that hides event names */
+}
+.c_eventNameWrap.card-header{
+    /* class for button that displays event names */
+    border-radius: 0px;
+    box-shadow: none;
+    text-align: left;
+    cursor: pointer;
+}
+.row{
+    border: 0px solid red;
+}
+.card{
+    border-radius: 0px;
+}
+#id_timelineName{
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 1.2;
+    background-color: transparent;
+    margin: 0px;
+    border: none;
+    color: #6c757d;
+}
+#id_timelineName:focus{
+    text-decoration: underline;
+    box-shadow: none;
+}
+#id_userName{
+    color: white;
+}
+#id_novelName{
+    min-width: 75%;
+}
+#id_novelName .custom-select{
+    border-radius: 0px;
+}
+#id_novelSelect{
+    padding: .25rem;
+}
+#id_timelineWrap{
+    margin-top: 100px;
+}
+#id_timelineControls{
+    display: none;
+}
+#id_addTimeline{
+    display: flex;
+}
+#id_yearsWrap{
+    display: none;
+    position: relative;
+}
+#id_addTimelineBtn{
+    cursor: pointer;
+    font-size: 2.5rem;
+}
+#id_addYearWrap{
+    display: none;
+}
+#id_addYearBtn, .c_addEventBtn{
+    cursor: pointer;
+    font-size: 1.5rem;
+}
+.c_year{
+    /*my year class*/
+    margin-bottom: 10px;
+}
+.c_event{
+    /*my event class*/
+    padding: 0px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.c_event .c_eventName{
+    font-size: 1.5rem;
+    background-color: transparent;
+    color: #000000;
+    margin: 0px;
+    border-radius: 0px;
+}
+.c_event .c_eventName:disabled{
+    border: none;
+    pointer-events: none;
+}
+.c_event textarea{
+    margin-top: 0px;
+    margin-bottom: 1rem;
+    width: 100%;
+    min-height: 125px;
+    border-radius: 0px;
+}
+.c_event textarea:disabled{
+    border: none;
+    resize: none;
+    background-color: transparent;
+}
+.c_event .c_addChar{
+    display: none;
+}
+#id_modalForm input, #id_modalForm textarea{
+    border-radius: 0px;
+}
+#id_fcharThoughts{
+    height: 125px;
+    resize: none;
+}
+.c_editIcons{
+    display: none;
+    position: absolute;
+}
+
+#id_yearsWrap > .ui-state-highlight {
+    margin-left: 15px;
+    height: 35px; 
+    line-height: 1.2em;
+    width: 100px;
+}
+.list-group.ui-sortable > .ui-state-highlight{
+    list-style: none;
+    height: 100px;
+}
+.c_year .c_editIcons{
+    margin-left: -15px;
+}
+.c_event .c_editIcons{
+    margin-left: -70px;
+}
+
+.c_editbtn{
+    display: block;
+}
+.c_deletebtn:hover, .c_editbtn:hover{
+    cursor: pointer;
+}
+.c_event .c_deletebtn{
+    margin: 15px;
+}
+.c_event .c_editbtn{
+    margin: 75px 15px 15px 15px;
+}
+#id_timelineWrap, .c_yearNameWrap, .c_year, .c_yearName, .c_event, .c_hideEvents, .c_reorderEvents{
+    -khtml-user-select: none;
+    -o-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
